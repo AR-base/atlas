@@ -1,0 +1,18 @@
+{
+  "name": "nexa-gestion",
+  "version": "2.4.1",
+  "private": true,
+  "description": "Outil interne de gestion de Nexa Digital (société fictive, démonstration Atlas)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.13",
+    "pg": "^8.11.5"
+  }
+}
