@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atlas — agent de connaissance d'entreprise</title>
+<meta name="description" content="Atlas interroge votre base de données, vos documents et votre code, puis répond avec ses sources." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="/css/app.css" />
+<script src="/vendor/sql-wasm.js" defer></script>
+<script src="/vendor/chart.umd.js" defer></script>
+<script src="/vendor/papaparse.min.js" defer></script>
+<script src="/vendor/read-excel-file.min.js" defer></script>
+<script src="/vendor/mammoth.browser.min.js" defer></script>
+<script type="module" src="/js/app.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <button id="menu" class="menu" type="button" aria-label="Sources">☰</button>
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div><b>Atlas</b><span data-t="tagline">Agent de connaissance d'entreprise</span></div>
+    </div>
+    <div class="top-actions">
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang="fr">FR</button><button type="button" data-lang="en">EN</button>
+      </div>
+      <button id="new-chat" class="ghost" type="button" data-t="newChat">Nouvelle conversation</button>
+    </div>
+  </header>
+
+  <aside class="side" aria-label="Sources">
+    <p class="badge" data-t="demoBadge">Données de démonstration fictives : Nexa Digital, agence web</p>
+    <h2 data-t="sources">Sources connectées</h2>
+
+    <section class="src src-db">
+      <h3><span class="dot"></span><span data-t="database">Base de données</span><span class="count" id="count-db">0</span></h3>
+      <ul id="src-db"></ul>
+    </section>
+    <section class="src src-docs">
+      <h3><span class="dot"></span><span data-t="documents">Documents</span><span class="count" id="count-docs">0</span></h3>
+      <ul id="src-docs"></ul>
+    </section>
+    <section class="src src-code">
+      <h3><span class="dot"></span><span data-t="code">Code</span><span class="count" id="count-code">0</span></h3>
+      <ul id="src-code"></ul>
+    </section>
+
+    <div id="drop" class="drop" role="button" tabindex="0" aria-describedby="drop-hint">
+      <b data-t="dropTitle">Ajoutez vos fichiers</b>
+      <span id="drop-hint" data-t="dropHint">CSV, Excel, PDF, Word, texte ou code.</span>
+    </div>
+    <input id="file" type="file" multiple hidden accept=".csv,.tsv,.xlsx,.pdf,.docx,.txt,.md,.html,.htm,.js,.ts,.py,.java,.cs,.php,.sql,.json,.yml,.yaml,.go,.rb,.css" />
+
+    <form id="gh-form" class="gh">
+      <label for="gh" data-t="githubLabel">Dépôt GitHub public</label>
+      <div class="gh-row">
+        <input id="gh" name="gh" autocomplete="off" spellcheck="false" maxlength="160" placeholder="propriétaire/dépôt" />
+        <button id="gh-btn" type="submit" data-t="githubBtn">Charger</button>
+      </div>
+    </form>
+
+    <p class="privacy" data-t="privacy">Vos fichiers restent dans ce navigateur.</p>
+  </aside>
+
+  <main class="main">
+    <div id="log" class="log" aria-live="polite">
+      <section id="hero" class="hero">
+        <h1 data-t="heroTitle">Posez une question à votre entreprise.</h1>
+        <p data-t="heroText">Atlas interroge la base de données, lit les documents internes et parcourt le code, puis répond avec ses sources.</p>
+        <div id="suggestions" class="suggestions"></div>
+      </section>
+    </div>
+    <form id="composer" class="composer">
+      <textarea id="q" rows="1" maxlength="4000" placeholder="" aria-label="Question"></textarea>
+      <button id="send" type="submit" data-t="send">Envoyer</button>
+      <p class="hint" data-t="hint">Entrée pour envoyer</p>
+    </form>
+  </main>
+</div>
+
+<dialog id="access" class="access">
+  <form id="access-form">
+    <h2 data-t="accessTitle">Code d'accès</h2>
+    <p data-t="accessText">Cette démonstration est protégée.</p>
+    <input id="access-input" type="password" autocomplete="off" maxlength="200" required />
+    <button type="submit" data-t="accessBtn">Valider</button>
+  </form>
+</dialog>
+<div id="toasts" class="toasts"></div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+name = "atlas"
+main = "src/worker.js"
+compatibility_date = "2025-01-01"
+
+# Static app in /public, served through the ASSETS binding. The Worker runs
+# first so every response gets HTTPS enforcement and the security headers.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+# Per-IP limit on /api/agent. One question uses several model calls (one per
+# tool round), so 40 calls a minute leaves room for honest use only.
+[[unsafe.bindings]]
+name = "AGENT_RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1002"
+simple = { limit = 40, period = 60 }
+
+# Model used by the agent (see MODELS in lib/agent.js).
+[vars]
+AI_MODEL = "claude-sonnet-5-5"
+
+# Secrets, never stored here:
+#   wrangler secret put ANTHROPIC_API_KEY   (required)
+#   wrangler secret put ACCESS_CODE         (recommended: visitors must enter it)

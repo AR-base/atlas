@@ -1,0 +1,35 @@
+{
+ "duplicate_clients": [
+  [
+   1,
+   44
+  ],
+  [
+   5,
+   45
+  ]
+ ],
+ "wrong_ttc_invoices": [
+  41,
+  133
+ ],
+ "overdue_31_44_no_reminder": [
+  151,
+  152,
+  153,
+  154
+ ],
+ "tickets_older_than_24_months": 281,
+ "tickets_resolved_before_opened": [
+  88,
+  412
+ ],
+ "counts": {
+  "employes": 14,
+  "clients": 45,
+  "projets": 71,
+  "factures": 154,
+  "tickets": 620,
+  "temps_passe": 897
+ }
+}
