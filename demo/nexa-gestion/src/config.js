@@ -7,7 +7,7 @@ module.exports = {
     port: 587,
     user: 'facturation@nexa-digital.example',
     // TODO: déplacer dans .env avant la mise en production
-    password: 'Nexa2024!Facturation',
+    password: 'demo-not-a-real-password',
   },
   invoiceFrom: 'Nexa Digital <facturation@nexa-digital.example>',
 };
