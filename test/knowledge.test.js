@@ -63,7 +63,7 @@ test('code tools expose the 45-day reminder and the security issues', async () =
   const grep = await kb.runTool('search_code', { query: 'FIRST_REMINDER_DAYS' });
   assert.ok(grep.view.matches.some((m) => m.path === 'src/billing/reminders.js' && /= 45/.test(m.text)));
   const file = await kb.runTool('read_file', { path: 'src/config.js' });
-  assert.match(file.text, /password: 'Nexa2024!Facturation'/);
+  assert.match(file.text, /password: 'demo-not-a-real-password'/);
   const re = await kb.runTool('search_code', { query: "ILIKE '%\" \\+", regex: true });
   assert.ok(re.view.matches.some((m) => m.path === 'src/routes/factures.js'));
   const tree = await kb.runTool('code_overview', {});
